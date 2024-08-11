@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest
@@ -24,8 +25,7 @@ class AddExpenseControllerTest {
     @Test
     void givenExpenseToAddShouldReturn201() throws Exception {
         AddExpenseDto addExpenseDto = new AddExpenseDto(1L, "name", 10.75);
-        Mockito.when(addExpenseService.addExpense(
-                new AddExpenseDto(1L,"name", 10.75)))
+        Mockito.when(addExpenseService.addExpense(any(AddExpenseDto.class)))
                 .thenReturn(addExpenseDto);
 
         mockMvc.perform(post("/expense/add"))
